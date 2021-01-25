@@ -11,7 +11,7 @@ setwd("F:/RESEARCH/BEST/Project")
 # define css for tooltips
 tooltip_css <- "background-color:gray;color:white;padding:5px;border-radius:5px;font-family:sans-serif;font-size:12px;"
 
-proj_sf <- readRDS("distritos_idh.rds") 
+proj_sf <- readRDS("prepare_data.rds") 
 
 str(proj_sf)
 
