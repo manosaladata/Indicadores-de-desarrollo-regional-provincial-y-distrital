@@ -5,7 +5,9 @@ source("global.R")
 shinyServer(function(input, output) {
         
         # make dataset a reactive object
-        dataInput <- reactive(proj_sf)
+        dataInput <- reactive({
+                choose_area(input$regions)
+        })
         
         # make new_sf a reactive object
         second_sf <- reactive({
@@ -33,8 +35,8 @@ shinyServer(function(input, output) {
                 DT::datatable(
                         second_sf() %>% 
                                 st_set_geometry(NULL) %>% 
-                                select(-c(1,3,5,6,7,8,9)),
-                        caption = 'La data se obtuve la pagina del IPE. Ver Documentacion para obtener informacion adicional',
+                                select(-c(1,3,6,7,8,9,10)),
+                        caption = 'La data se obtuvo de la pagina del IPE. Ver Documentacion para obtener informacion adicional',
                         options = list(lengthMenu = c(10, 20, 36), pageLength = 10) 
                 ) %>% 
                         formatRound(c('esperanza', 'secundaria', 'years_educ', 'idh'), digits = 1) %>%

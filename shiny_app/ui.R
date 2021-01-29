@@ -16,17 +16,17 @@ shinyUI(fluidPage(
   # line below to fix bug in ggiraph when deploying app
   tags$head( tags$style(type = "text/css", "text {font-family: sans-serif}")),
   theme = shinytheme("yeti"),
-  titlePanel("?ndice de Desarrollo Humano (IDH)"),
+  titlePanel("Indice de Desarrollo Humano (IDH)"),
   
   sidebarLayout(
     sidebarPanel(
       pickerInput(
-        inputId = "ubigeo", 
-        label = "Seleccionar distritos", 
-        choices = levels(proj_sf$ubigeo), 
-        selected = levels(proj_sf$ubigeo),
-        multiple = TRUE,
-        options = list(`actions-box` = TRUE), 
+        inputId = "regions", 
+        label = "Seleccionar departamentos para plotear", 
+        choices = levels(proj_sf$DEPARTAMEN), 
+        selected = levels(proj_sf$DEPARTAMEN),
+        options = list(`actions-box` = TRUE),
+        multiple = TRUE
         ),
       br(),
       pickerInput(
@@ -35,13 +35,12 @@ shinyUI(fluidPage(
         choices = c("Poblacion", 
                     "Indice de Desarrollo Humano",
                     "Esperanza de vida al nacer",
-                    "Poblacion con secundaria completa",
                     "Anos de educacion",
-                    "Ingreso familiar percapita",
+                    "Poblacion con secundaria completa",
+                    "Ingreso familiar percapita"),
         selected = "Poblacion",
-        multiple = TRUE,
-        width = '210px'
-      ),
+        width = '210px',
+        ),
       pickerInput(
         inputId = "representation",
         label = "Elegir una representacion visual", 
@@ -50,17 +49,9 @@ shinyUI(fluidPage(
         multiple = FALSE,
         width = '210px'
       ),
-      pickerInput(
-        inputId = "year",
-        label = "Elegir un ano", 
-        choices = c("2003", "2007", "2010", "2011", "2012", "2015", "2017", "2018", "2019"),
-        selected = "2003",
-        multiple = TRUE,
-        width = '210px'
-      ),
       br(),
       h6(em("N.B.: Por favor, pedimos paciencia mientras carga el cartograma."))
-    ),
+      ),
     
     mainPanel(
       tabsetPanel(
@@ -77,7 +68,7 @@ shinyUI(fluidPage(
           "Table", 
           DT::dataTableOutput("table")
         ),
-        tabPanel(
+          tabPanel(
           "Documentation", 
           includeMarkdown("about.md"),
           br()
@@ -85,4 +76,5 @@ shinyUI(fluidPage(
       )
     )
   )
-)))
+))
+

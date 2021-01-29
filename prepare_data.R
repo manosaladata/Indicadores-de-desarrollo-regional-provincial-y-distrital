@@ -116,8 +116,8 @@ bd <- rbind(bd,idh11)
 bd <- rbind(bd,idh12)
 bd <- rbind(bd,idh15)
 bd <- rbind(bd,idh17)
-bd <- rbind(bd,idh18)
-bd <- rbind(bd,idh19)
+#bd <- rbind(bd,idh18)
+#bd <- rbind(bd,idh19)
 str(bd)
 View(bd)
 
@@ -129,6 +129,9 @@ distritos_idh <- distritos_1 %>%
         left_join(bd, by="ubigeo")
 str(distritos_idh)
 View(distritos_idh)
+
+distritos_idh <- distritos_idh %>%
+        filter(year=="2011")
 
 saveRDS(distritos_idh, "distritos_idh.rds")
 
